@@ -1,43 +1,39 @@
 #----------------------------------------------------------------
-# Una finestra amb textbox, buttons i labels
-#-----------------------------------------------------------------
-# Previament s'ha d'instalar la llibreria tkinter, alerta les
-# diferents versions.
-
+# Una finestra amb textbox, buttons i labels amb grid
+#----------------------------------------------------------------
 from tkinter import *
 from tkinter import messagebox
 
-#Primer s'han de definir les funcions dels events
-
 def identi():
-    m="Hola "+t1.get("1.0","end")
+    m = "login " + t1.get("1.0", "end")
     messagebox.showinfo(message=m, title="Saludo")
-    #ha de confirmar que l'usuari és com el que es guarda al file on es va crear
-    #i que la contrasenya genera el mateix hash
+   
 
-#Crear objecte arrel, tipus tkinter
-raiz=Tk()
 
-#Defineix el comportament de la finestra
+raiz = Tk()
 raiz.title("Python HASH")
-raiz.resizable (False, False) #tamany fix
+raiz.resizable(True, True)  
 
-#A dins de la finestra crea un frame
-miFrame=Frame(raiz, width=400, height=300)
-miFrame.pack()
-
-Label (miFrame, text="Usuari").place(x=10,y=50)
-
-#usuari
-t1=Text(raiz)
-t1.place(x=10,y=70) 
-t1.config(width=15,height=1, font=("Consolas",12))
+# Frame contenidor
+register = Frame(raiz, width=400, height=300, bg="lightblue")
+register.pack(side=LEFT, padx=20, pady=20)  
 
 
-#botó identificar-se
-button1 = Button(raiz, text="Login", command=identi)
-button1.place (x=160,y=70)
+login = Frame(raiz, width=400, height=300, bg="lightgreen")
+login.pack(side=RIGHT, padx=20, pady=20)  
 
 
-#Aqui fa un loop fins que es tanca la finestra
+# Label usuari
+Label(register, text="Usuari").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+Label(login, text="login").grid(row=1, column=1, padx=5, pady=5, sticky="e")
+
+# Caixa de text usuari
+t1 = Text(register, width=15, height=1, font=("Consolas", 12))
+t1.grid(row=1, column=0, padx=5, pady=5)
+
+# Botó login
+button1 = Button(register, text="Login", command=identi)
+button1.grid(row=0, column=2, padx=10, pady=5)
+
+# Loop principal
 raiz.mainloop()
